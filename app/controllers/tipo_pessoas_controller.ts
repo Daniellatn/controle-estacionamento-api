@@ -20,16 +20,15 @@ export default class TipoPessoasController {
   }
 
   async show({params}: HttpContext) {
-    try {
-      return await TipoPessoa.findOrFail(params.id)
-    } catch (error) {
-      return {message: 'Registro não encontrado.'}
-    }
-    // return await TipoPessoa.query()
-    //                     .where('id', params.id)
-    //                     .preload('type')
-    //                     .preload('ingredients')
-    //                     .first()
+    // try {
+    //   return await TipoPessoa.findOrFail(params.id)
+    // } catch (error) {
+    //   return {message: 'Registro não encontrado.'}
+    // }
+    return await TipoPessoa.query()
+                        .where('id', params.id)
+                        .preload('pessoas')
+                        .first()
   }
 
   async store({request}: HttpContext) {

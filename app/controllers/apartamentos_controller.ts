@@ -10,16 +10,16 @@ export default class ApartamentosController {
   }
 
   async show({params}: HttpContext) {
-    try {
-      return await Apartamento.findOrFail(params.id)
-    } catch (error) {
-      return {message: 'Registro não encontrado.'}
-    }
-    // return await Bloco.query()
-    //                     .where('id', params.id)
-    //                     .preload('type')
-    //                     .preload('ingredients')
-    //                     .first()
+    // try {
+    //   return await Apartamento.findOrFail(params.id)
+    // } catch (error) {
+    //   return {message: 'Registro não encontrado.'}
+    // }
+    return await Apartamento.query()
+                        .where('id', params.id)
+                        .preload('bloco')
+                        .preload('pessoa')
+                        .first()
   }
 
   async store({request}: HttpContext) {
