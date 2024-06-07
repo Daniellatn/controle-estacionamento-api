@@ -10,16 +10,17 @@ export default class VeiculosController {
   }
 
   async show({params}: HttpContext) {
-    try {
-      return await Veiculo.findOrFail(params.id)
-    } catch (error) {
-      return {message: 'Registro não encontrado.'}
-    }
-    // return await Bloco.query()
-    //                     .where('id', params.id)
-    //                     .preload('type')
-    //                     .preload('ingredients')
-    //                     .first()
+    // try {
+    //   return await Veiculo.findOrFail(params.id)
+    // } catch (error) {
+    //   return {message: 'Registro não encontrado.'}
+    // }
+    return await Veiculo.query()
+                        .where('id', params.id)
+                        .preload('tipoVeiculo')
+                        .preload('apartamento')
+                        .preload('imagem')
+                        .first()
   }
 
   async store({request}: HttpContext) {

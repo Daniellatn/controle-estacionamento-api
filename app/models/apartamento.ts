@@ -1,5 +1,8 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@adonisjs/lucid/orm'
+import { BaseModel, belongsTo, column } from '@adonisjs/lucid/orm'
+import Bloco from './bloco.js'
+import type { BelongsTo } from '@adonisjs/lucid/types/relations'
+import Pessoa from './pessoa.js'
 
 export default class Apartamento extends BaseModel {
   @column({ isPrimary: true })
@@ -28,4 +31,10 @@ export default class Apartamento extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
+
+  @belongsTo(() => Bloco)
+  declare bloco: BelongsTo<typeof Bloco>
+
+  @belongsTo(() => Pessoa)
+  declare pessoa: BelongsTo<typeof Pessoa>
 }

@@ -6,6 +6,7 @@ export default class PessoasController {
   async index({request}: HttpContext) {
     const page = request.input('page')
     return await Pessoa.query()
+                        .preload('tipoPessoa')
                         .paginate(page, 5)
   }
 

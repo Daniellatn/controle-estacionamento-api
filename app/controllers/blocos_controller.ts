@@ -10,16 +10,15 @@ export default class BlocosController {
   }
 
   async show({params}: HttpContext) {
-    try {
-      return await Bloco.findOrFail(params.id)
-    } catch (error) {
-      return {message: 'Registro não encontrado.'}
-    }
-    // return await Bloco.query()
-    //                     .where('id', params.id)
-    //                     .preload('type')
-    //                     .preload('ingredients')
-    //                     .first()
+    // try {
+    //   return await Bloco.findOrFail(params.id)
+    // } catch (error) {
+    //   return {message: 'Registro não encontrado.'}
+    // }
+    return await Bloco.query()
+                        .where('id', params.id)
+                        .preload('apartamentos')
+                        .first()
   }
 
   async store({request}: HttpContext) {

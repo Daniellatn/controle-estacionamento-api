@@ -1,6 +1,7 @@
 import type { HttpContext } from '@adonisjs/core/http'
 
 import Localizacao from "#models/localizacao";
+import Vaga from '#models/vaga';
 
 export default class LocalizacaosController {
   async index({request}: HttpContext) {
@@ -10,16 +11,15 @@ export default class LocalizacaosController {
   }
 
   async show({params}: HttpContext) {
-    try {
-      return await Localizacao.findOrFail(params.id)
-    } catch (error) {
-      return {message: 'Registro não encontrado.'}
-    }
-    // return await Bloco.query()
-    //                     .where('id', params.id)
-    //                     .preload('type')
-    //                     .preload('ingredients')
-    //                     .first()
+    // try {
+    //   return await Localizacao.findOrFail(params.id)
+    // } catch (error) {
+    //   return {message: 'Registro não encontrado.'}
+    // }
+    return await Localizacao.query()
+                        .where('id', params.id)
+                        .preload('vagas')
+                        .first()
   }
 
   async store({request}: HttpContext) {

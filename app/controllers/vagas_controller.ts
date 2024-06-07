@@ -10,16 +10,16 @@ export default class VagasController {
   }
 
   async show({params}: HttpContext) {
-    try {
-      return await Vaga.findOrFail(params.id)
-    } catch (error) {
-      return {message: 'Registro não encontrado.'}
-    }
-    // return await Bloco.query()
-    //                     .where('id', params.id)
-    //                     .preload('type')
-    //                     .preload('ingredients')
-    //                     .first()
+    // try {
+    //   return await Vaga.findOrFail(params.id)
+    // } catch (error) {
+    //   return {message: 'Registro não encontrado.'}
+    // }
+    return await Vaga.query()
+                        .where('id', params.id)
+                        .preload('localizacao')
+                        .preload('apartamento')
+                        .first()
   }
 
   async store({request}: HttpContext) {

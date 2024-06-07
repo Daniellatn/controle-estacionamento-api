@@ -10,16 +10,15 @@ export default class TipoVeiculosController {
   }
 
   async show({params}: HttpContext) {
-    try {
-      return await TipoVeiculo.findOrFail(params.id)
-    } catch (error) {
-      return {message: 'Registro não encontrado.'}
-    }
-    // return await Bloco.query()
-    //                     .where('id', params.id)
-    //                     .preload('type')
-    //                     .preload('ingredients')
-    //                     .first()
+    // try {
+    //   return await TipoVeiculo.findOrFail(params.id)
+    // } catch (error) {
+    //   return {message: 'Registro não encontrado.'}
+    // }
+    return await TipoVeiculo.query()
+                        .where('id', params.id)
+                        .preload('veiculos')
+                        .first()
   }
 
   async store({request}: HttpContext) {
